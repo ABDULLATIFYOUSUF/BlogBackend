@@ -9,7 +9,11 @@ const connectDB = require("./db");
 const app = express();
 
 // Set up CORS middleware
-app.use(cors());
+app.use(cors({
+    origin: ["https://blog-frontend-iota-six.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 
 // Set up logging middleware
 app.use(morgan('dev'));
