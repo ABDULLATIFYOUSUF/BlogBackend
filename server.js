@@ -24,7 +24,7 @@ const app = express();
 
 app.use(cors(
     {
-        origin: ["blog-frontend-iota-six.vercel.app"],
+        origin: ["https://blog-frontend-iota-six.vercel.app"],
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true
     }
