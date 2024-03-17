@@ -6,11 +6,13 @@ const dotenv = require('dotenv');
 const connectDB = require("./db");
 const PORT = process.env.PORT || 8080
 
-app.use(cors({
-    origin: "https://blog-frontend-iota-six.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-  }));
+app.use(cors(
+    {
+        origin: ["https://blog-frontend-iota-six.vercel.app/"],
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true
+    }
+));
 
 // dotenv config
 dotenv.config();
@@ -27,6 +29,7 @@ connectDB();
 const app = express();
 
 //middleware
+
 
 app.use(express.json());
 app.use(morgan('dev'))
