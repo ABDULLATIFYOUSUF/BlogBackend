@@ -4,41 +4,41 @@ const morgan = require("morgan");
 const colors = require("colors");
 const dotenv = require('dotenv');
 const connectDB = require("./db");
-const PORT = process.env.PORT || 8080
 
-app.use(cors(
-    {
-        origin: ["https://blog-frontend-iota-six.vercel.app/"],
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true
-    }
-));
-
-// dotenv config
-dotenv.config();
-
-//routes
-const userRoutes = require('./models/routes/userRoutes')
-const blogRoutes = require('./models/routes/blogRoutes')
-
-//mongoDB connection
-connectDB();
-
-
-// rest object
+// Initialize Express app
 const app = express();
 
-//middleware
+// Set up CORS middleware
+app.use(cors({
+    origin: ["https://blog-frontend-iota-six.vercel.app"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+}));
 
+// Set up logging middleware
+app.use(morgan('dev'));
 
+// Set up JSON parsing middleware
 app.use(express.json());
-app.use(morgan('dev'))
 
-//routes
+// Load environment variables
+dotenv.config();
+
+// Load routes
+const userRoutes = require('./models/routes/userRoutes');
+const blogRoutes = require('./models/routes/blogRoutes');
+
+// Connect to MongoDB
+connectDB();
+
+// Define routes
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/blog", blogRoutes);
 
-//listen
+// Define port
+const PORT = process.env.PORT || 8080;
+
+// Start the server
 app.listen(PORT, () => {
-    console.log(`server running on ${process.env.DEV_MODE} mode port no ${PORT}` .bgCyan.white)
-})
+    console.log(`Server running in ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan.white);
+});
