@@ -22,13 +22,12 @@ const app = express();
 
 //middleware
 
-app.use(cors(
-    {
-        origin: ["https://blog-frontend-iota-six.vercel.app/"],
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true
-    }
-));
+app.use(cors({
+    origin: "https://blog-frontend-iota-six.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+  }));
+  
 app.use(express.json());
 app.use(morgan('dev'))
 
